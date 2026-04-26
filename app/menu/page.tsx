@@ -77,7 +77,7 @@ export default function MenuPage() {
       showToast(`✓ ${toAdd.length} ingredientes añadidos`)
     }
 
-    setAddedDays(prev => new Set([...prev, dayIdx]))
+    setAddedDays(prev => new Set(Array.from(prev).concat(dayIdx)))
   }
 
   async function addAllToList() {
