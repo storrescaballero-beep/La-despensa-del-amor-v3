@@ -85,8 +85,7 @@ export default function MenuPage() {
     const { data: existing } = await supabase.from('items').select('name')
     const existingNames = new Set((existing || []).map((i: any) => i.name.toLowerCase()))
     const allIngredients = [...new Set(menu.menu.flatMap(d => d.ingredientes))]
-    const toAdd = allIngredients.filter(ing => !existingNames.has(ing.toLowerCase()))
-    if (toAdd.length === 0) { showToast('Todo ya está en la lista'); return }
+const allIngredients = Array.from(new Set(menu.menu.flatMap(d => d.ingredientes)))    if (toAdd.length === 0) { showToast('Todo ya está en la lista'); return }
     await supabase.from('items').insert(
       toAdd.map(ing => ({ name: ing, category: 'despensa', quantity: 1, done: false, added_by: 'menu' }))
     )
